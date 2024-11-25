@@ -3,8 +3,10 @@ class ArrayList(object):
         self.items = list()
         self.artist = artist
         self.song = song
+        self.size = 0
         if sourceCollections:
             for item in sourceCollections:
+                self.size += 1
                 self.add(item)
     
     def isEmpty(self):
