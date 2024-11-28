@@ -1,13 +1,11 @@
 class ArrayList(object):
-    def __init__(self, artist, song, sourceCollections=None):
+    def __init__(self, capacity, emptyValue = None):
         self.items = list()
-        self.artist = artist
-        self.song = song
-        self.size = 0
-        if sourceCollections:
-            for item in sourceCollections:
-                self.size += 1
-                self.add(item)
+        self.capacity = capacity
+        self.logicalSize = 0
+        self.emptyValue = emptyValue
+        for count in range(capacity):
+            self.items.append(emptyValue)
 
     def isEmpty(self):
         # TODO Returns True if array is empty, False otherwise.
@@ -34,6 +32,23 @@ class ArrayList(object):
         # TODO Returns True if self equals to other, if not it will return False
         pass
 
+    def __shrink__(self):
+        # Decreases the physical size of the array if necessary.
+        if self.logicalSize <= self.__len__ // 4 and self.__len__ >= self.capacity * 2:
+            temp = ArrayList(self.__len__ // 2)
+            for i in range(self.logicalSize):
+                temp.items[i] = self.items[i]
+            self.items = temp.items
+
+    def __grow__(self):
+        #Increases the physical size of the array if necessary.
+        if self.logicalSize == self.__len__:
+            temp = ArrayList(self.__len__ * 2)
+            for i in range(self.logicalSize):
+                temp.items[i] = self.items[i]
+            self.items = temp.items
+
+
     def clear(self):
         # TODO Makes the array empty.
         self.items = []
@@ -58,3 +73,15 @@ class ArrayList(object):
     def display(self):
         # TODO Displays the playlist in its current order.
         pass
+
+# Testing
+def main():
+    playlist = ArrayList(5)
+    response = 'y'
+    while(response != 'N'):
+        songName = input("Enter song name")
+        artistName = input("Enter artist name")
+        playlist.add(songName,artistName)
+        response = input("Would you like to enter another song? Y/N")
+
+main()
