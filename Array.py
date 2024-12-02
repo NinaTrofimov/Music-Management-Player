@@ -29,7 +29,11 @@ class ArrayList(object):
 
     def __add__(self, other):
         # TODO Returns a new array containing the contents of self and other
-        pass
+        newArray = ArrayList(self.items)
+        for item in other:
+            newArray.add(item)
+            self.logicalSize += 1
+        
 
     def __eq__(self, other):
         # TODO Returns True if self equals to other, if not it will return False
@@ -37,19 +41,29 @@ class ArrayList(object):
 
     def __shrink__(self):
         # Decreases the physical size of the array if necessary.
-        if self.logicalSize <= len(self) // 4 and len(self) >= self.capacity * 2:
-            temp = ArrayList(len(self) // 2)
-            for i in range(self.logicalSize):
-                temp.items[i] = self.items[i]
-            self.items = temp.items
+        #create new capacity size to shrink array
+        new_capacity = max(self.capacity, len(self.items) // 2)
+        #create a temp array with new capacity
+        temp = ArrayList(new_capacity, self.emptyValue)
+        #copy all the self.items onto the temp array with for loop
+        for i in range(self.logicalSize):
+            temp.items[i] = self.items[i]
+        #copy temp items onto self items
+        self.items = temp.items
+        # update capacity
+        self.capacity = len(self.items)
 
     def __grow__(self):
         # Increases the physical size of the array if necessary.
-        if self.logicalSize == self.__len__:
-            temp = ArrayList(len(self) * 2)
-            for i in range(self.logicalSize):
-                temp.items[i] = self.items[i]
-            self.items = temp.items
+        new_capacity = max(2 * self.capacity, 1)  # Ensure capacity is at least 1
+        # create temp array with the new capacity
+        temp = ArrayList(new_capacity, self.emptyValue)
+        #copy onto temp array
+        for i in range(self.logicalSize):  
+            temp.items[i] = self.items[i]
+        #recopy onto self items
+        self.items = temp.items
+        self.capacity = new_capacity
 
 
     def clear(self):
@@ -61,20 +75,38 @@ class ArrayList(object):
     def add(self, artist, song):
         # TODO Adds the song name and artist name 
         # Maybe should be stored as a dictionary or tuple?
-        for i in range(len(self.items)):
-            if self.items[i] == self.emptyValue:    # Find the fist empty slot
-                self.items[i] = (artist, song)      # Place values
-                self.logicalSize += 1
-                return
+
+        #Check to see if theres room to add the artist and song
+        if self.logicalSize == self.__len__():
+            self.__grow__()
+
+        fullSong = [(artist),(song)]
+        self.items[self.logicalSize] = (fullSong)
+        self.logicalSize += 1
+        
+
     def remove(self, song):
-        # TODO  Adds the song name and artist name 
-        for i in range(len(self.items)):    # Loop through the list
-            artist, track = self.items[i]    # Get access to the 2 items(artist, song) by index.
-            if track == song:   # Check if the song mathes the one to remove
-                self.items[i] = self.emptyValue
+        # TODO  Removes the song name and artist name 
+        # Search for the song by name
+        for i in range(self.logicalSize):
+            if self.items[i][1] == song:  # Compare with song name
+                # Shift items left to remove the found song
+                for j in range(i, self.logicalSize - 1):
+                    self.items[j] = self.items[j + 1]
+
+                # Clear the last logical item and update logical size
+                self.items[self.logicalSize - 1] = self.emptyValue
                 self.logicalSize -= 1
-                return True # If song was found return True
-        return False # If song wasn't found return false
+
+                # Check if array should shrink
+                if self.logicalSize <= len(self.items) // 4 and len(self.items) > self.capacity * 2:
+                    self.__shrink__()
+
+                print(f"'{song}' has been removed.")
+                return True
+
+        print(f"'{song}' not found in the playlist.")
+        return False
 
     def sort(self):
         # TODO Sorts the playlist alphabetically by song title.
@@ -82,7 +114,14 @@ class ArrayList(object):
 
     def search(self, song):
         # TODO Check for a specific song by name.
-        pass
+
+        # goes through the items 
+        for i in range(self.logicalSize):
+            #grabs item at the index 1 of the tuple and compares to song name
+            if self.items[i][1] == song:
+                #prints if it finds it
+                return print(f'{song} is in playlist at index {i}')
+        return print("Song is not in playlist")
 
 
     # def display(self):
@@ -97,31 +136,25 @@ class ArrayList(object):
 
     # Main function to test code so far
 
-def main():
-    playlist = ArrayList(5)
-    response = 'y'
-    while(response != 'N'):
-        songName = input("Enter song name: ")
-        artistName = input("Enter artist name: ")
-        playlist.add(artistName, songName)
-        response = input("Would you like to enter another song? Y/N")
-        response = response.upper()
-
-        print(playlist)
-main()
 
 
-# def test_code():
-#     playlist = ArrayList(5)
-#
-#     print("After adding")
-#     playlist.add("Artist1", "Song1")
-#     playlist.add("Artist2", "Song2")
-#     playlist.add("Artist3", "Song3")
-#
-#     print(playlist)
-#
-#     print('after removing')
-#     playlist.remove('Song2')
-#     print(playlist)
-# test_code()
+
+def test_code():
+     playlist = ArrayList(5)
+
+     print("After adding")
+     playlist.add("Artist1", "Song1")
+     playlist.add("Artist2", "Song2")
+     playlist.add("Artist3", "Song3")
+
+     print(playlist)
+
+     
+
+     print('after removing')
+     playlist.remove('Song2')
+     print(playlist)
+
+     playlist.search('Song3')
+     
+test_code()
