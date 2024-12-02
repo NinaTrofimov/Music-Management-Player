@@ -126,58 +126,58 @@ class ArrayList(object):
         return print("Song is not in playlist")
 
 
-def test_code():
-    playlist1 = ArrayList(5)
+# def test_code():
+#     playlist1 = ArrayList(5)
+#
+#     print("After adding")  # add test
+#     playlist1.add("Artist1", "Song1")
+#     playlist1.add("Artist2", "Song2")
+#     playlist1.add("Artist3", "Song3")
+#     print(playlist1)
+#     print()
+#     playlist1.remove('Song2')  # remove test
+#     print(playlist1)
+#     print()
+#     playlist1.search('Song3')  # search test
+#     playlist1.search('Song2')
+#     print("\nClear playlist")   # clear test
+#     playlist1.clear()
+#     print(playlist1)  # Should display nothing
+#     print(f"Is empty: {playlist1.isEmpty()}\n")  # should return true
+#
+#     print('Add 9 songs to new playlist')
+#     playlist2 = ArrayList(5)  # grow and shrink test
+#     for i in range(1, 10):
+#         playlist2.add(f'Artist{i}', f'Song{i}')
+#         print(f"Current logical size: {playlist2.logicalSize}, Capacity: {playlist2.capacity}")
+#     print("\nAfter adding 9 songs")
+#     print(playlist2)
+#
+#     for i in range(1, 8):
+#         playlist2.remove(f'Song{i}')
+#         print(f"Current logical size: {playlist2.logicalSize}, Capacity: {playlist2.capacity}")
+#
+#     print("After removing 7 songs")
+#     print(playlist2)
+#     playlist2.clear()
+#
+#     playlist1 = ArrayList(5)
+#     playlist1.add("Artist1", "Song1")
+#     playlist1.add("Artist2", "Song2")
+#     playlist2 = ArrayList(5)
+#     playlist2.add("Artist1", "Song1")
+#     playlist2.add("Artist2", "Song2")
+#
+#     # test equality: should be true since the playlists are identical
+#     print(f"playlist1 == playlist2: {playlist1 == playlist2}")
+#     # modify one playlist
+#     playlist1.add("Artist3", "Song3")
+#     # test equality again: should be false since the playlists are now different
+#     print(f"playlist1 == playlist2: {playlist1 == playlist2}")
+#
+#     combined_playlist = playlist1 + playlist2   # __add__ test
+#
+#     print("\nCombined playlist:")
+#     print(combined_playlist)
 
-    print("After adding")  # add test
-    playlist1.add("Artist1", "Song1")
-    playlist1.add("Artist2", "Song2")
-    playlist1.add("Artist3", "Song3")
-    print(playlist1)
-    print()
-    playlist1.remove('Song2')  # remove test
-    print(playlist1)
-    print()
-    playlist1.search('Song3')  # search test
-    playlist1.search('Song2')
-    print("\nClear playlist")   # clear test
-    playlist1.clear()
-    print(playlist1)  # Should display nothing
-    print(f"Is empty: {playlist1.isEmpty()}\n")  # should return true
-
-    print('Add 9 songs to new playlist')
-    playlist2 = ArrayList(5)  # grow and shrink test
-    for i in range(1, 10):
-        playlist2.add(f'Artist{i}', f'Song{i}')
-        print(f"Current logical size: {playlist2.logicalSize}, Capacity: {playlist2.capacity}")
-    print("\nAfter adding 9 songs")
-    print(playlist2)
-
-    for i in range(1, 8):
-        playlist2.remove(f'Song{i}')
-        print(f"Current logical size: {playlist2.logicalSize}, Capacity: {playlist2.capacity}")
-
-    print("After removing 7 songs")
-    print(playlist2)
-    playlist2.clear()
-
-    playlist1 = ArrayList(5)
-    playlist1.add("Artist1", "Song1")
-    playlist1.add("Artist2", "Song2")
-    playlist2 = ArrayList(5)
-    playlist2.add("Artist1", "Song1")
-    playlist2.add("Artist2", "Song2")
-
-    # test equality: should be true since the playlists are identical
-    print(f"playlist1 == playlist2: {playlist1 == playlist2}")
-    # modify one playlist
-    playlist1.add("Artist3", "Song3")
-    # test equality again: should be false since the playlists are now different
-    print(f"playlist1 == playlist2: {playlist1 == playlist2}")
-
-    combined_playlist = playlist1 + playlist2   # __add__ test
-
-    print("\nCombined playlist:")
-    print(combined_playlist)
-
-test_code()
+# test_code()
