@@ -1,3 +1,17 @@
+"""
+
+Authors: Isaiah, Nina, Anthony, Tyler
+
+Date: 12/4/2024
+
+File: main.py
+
+Description:Supports methods like add, remove, search, clear, __add__, and __eq__
+
+"""
+
+import random
+
 class ArrayList(object):
     def __init__(self, capacity, emptyValue=None):
         self.items = list()
@@ -111,9 +125,11 @@ class ArrayList(object):
         print(f"'{song}' not found in the playlist.")
         return False
 
-    def sort(self):
-        # TODO Sorts the playlist alphabetically by song title.
-        pass
+    def shuffle(self):
+        # TODO shuffles the playlist randomly.
+        self.items[:self.logicalSize] = random.sample(self.items[:self.logicalSize], len(self.items[:self.logicalSize]))
+        # slice not including None values  |  select a random sample the slice   | Tells sample how many items to select
+
 
     def search(self, song):
         # TODO Check for a specific song by name.
@@ -179,5 +195,9 @@ class ArrayList(object):
 #
 #     print("\nCombined playlist:")
 #     print(combined_playlist)
-
+#     print()
+#
+#     combined_playlist.shuffle()
+#     print(combined_playlist)
+#
 # test_code()

@@ -71,6 +71,12 @@ def main():
     print(combined_playlist)    # Display new playlist
     print()
 
+    # Shuffle combined playlist
+    print("Shuffling Combined Playlist:")
+    combined_playlist.shuffle()  # Shuffle the combined playlist
+    print(combined_playlist)  # Display shuffled playlist
+    print()
+
     # Check if the playlists are equal using __eq__
     print(f"Is playlist1 equal to playlist2? {playlist1 == playlist2}")     # should result in False
     print()
